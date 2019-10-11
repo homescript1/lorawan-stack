@@ -16,8 +16,6 @@ import React from 'react'
 import { defineMessages } from 'react-intl'
 import bind from 'autobind-decorator'
 
-import Markdown from 'markdown-to-jsx'
-import style from './details.styl'
 import Button from '../../button'
 import style from './details.styl'
 
@@ -65,6 +63,7 @@ export default class Details extends React.PureComponent {
   render() {
     const { expanded, buttonIcon, buttonText } = this.state
     const { details } = this.props
+    const content = typeof details === 'string' ? details : JSON.stringify(details, undefined, 2)
     return (
       <div className={style.details}>
         <Button
@@ -75,9 +74,7 @@ export default class Details extends React.PureComponent {
           icon={buttonIcon}
           message={buttonText}
         />
-        {expanded && (
-          <pre className={style.detailsDropdown}>{JSON.stringify(details, undefined, 2)}</pre>
-        )}
+        {expanded && <pre className={style.detailsDropdown}>{content}</pre>}
       </div>
     )
   }
