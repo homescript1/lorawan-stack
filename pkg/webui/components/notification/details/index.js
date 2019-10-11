@@ -19,6 +19,7 @@ import bind from 'autobind-decorator'
 import Markdown from 'markdown-to-jsx'
 import style from './details.styl'
 import Button from '../../button'
+import style from './details.styl'
 
 const m = defineMessages({
   showDetails: 'Show Details',
