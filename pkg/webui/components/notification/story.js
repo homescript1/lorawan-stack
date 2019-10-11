@@ -47,7 +47,12 @@ storiesOf('Notification', module)
     <div>
       <Notification title="example message title" error="We got a problem here!" />
       <ErrorNotification error="We got a problem here!" />
-      <Notification title="example message title" error="We got a problem here!" small />
+      <Notification
+        title="example message title"
+        error="We got a problem here! And the description is quite lengthy as well, which can sometimes be a problem."
+        details={{ foo: 'bar' }}
+        small
+      />
       <Notification error="We got a problem here!" small />
     </div>
   ))
