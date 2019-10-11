@@ -35,8 +35,8 @@ const Notification = function({
   action,
   actionMessage,
   buttonIcon,
-  showDetails,
   children,
+  details,
 }) {
   const classname = classnames(style.notification, className, {
     [style.error]: error,
@@ -54,21 +54,23 @@ const Notification = function({
   }
 
   const content = message || error || warning || info || success
-  const Component = children
 
   return (
     <div className={classname}>
-      <Icon className={style.icon} icon={icon} large={!small} />
-      <div className={style.content}>
-        {title && <Message className={style.title} content={title} component="h4" />}
-        <div>
-          <Component content={content} values={messageValues} />
-          {action && (
-            <Button naked secondary icon={buttonIcon} onClick={action} message={actionMessage} />
-          )}
+      <div className={style.container}>
+        <Icon className={style.icon} icon={icon} large={!small} />
+        <div className={style.content}>
+          {title && <Message className={style.title} content={title} component="h4" />}
+          <div>
+            {content && <Message content={content} values={messageValues} />}
+            {children}
+            {action && (
+              <Button naked secondary icon={buttonIcon} onClick={action} message={actionMessage} />
+            )}
+          </div>
         </div>
       </div>
-      {showDetails && <Details className={style.details} details={error} />}
+      {details && <Details className={style.details} details={details} />}
     </div>
   )
 }
@@ -77,8 +79,8 @@ Notification.propTypes = {
   action: PropTypes.func,
   actionMessage: PropTypes.message,
   buttonIcon: PropTypes.string,
-  showDetails: PropTypes.bool,
-  children: PropTypes.func,
+  details: PropTypes.mixed,
+  children: PropTypes.node,
   error: PropTypes.error,
   info: PropTypes.message,
   message: PropTypes.message,
@@ -92,9 +94,8 @@ Notification.propTypes = {
 Notification.defaultProps = {
   action: undefined,
   actionMessage: undefined,
-  children: Message,
   buttonIcon: '',
-  showDetails: false,
+  details: undefined,
 }
 
 export default Notification
