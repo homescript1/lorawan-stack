@@ -44,6 +44,7 @@ const Notification = function({
     [style.info]: info,
     [style.small]: small,
     [style.success]: success,
+    [style.withDetails]: Boolean(details),
   })
 
   let icon = 'info'
