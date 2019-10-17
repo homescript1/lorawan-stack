@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Emails when the state of a user or OAuth client changes.
 - Option to generate claim authentication codes for devices automatically.
 - User invitations can now be sent and redeemed.
+- MQTT integrations page in the console.
 
 ### Changed
 
