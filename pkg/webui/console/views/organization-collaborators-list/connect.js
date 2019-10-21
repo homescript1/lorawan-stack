@@ -15,7 +15,12 @@
 import { connect } from 'react-redux'
 
 import { getOrganizationCollaboratorsList } from '../../store/actions/organizations'
-import { selectSelectedOrganizationId } from '../../store/selectors/organizations'
+import {
+  selectSelectedOrganizationId,
+  selectOrganizationCollaborators,
+  selectOrganizationCollaboratorsTotalCount,
+  selectOrganizationCollaboratorsFetching,
+} from '../../store/selectors/organizations'
 
 export default OrganizationCollaboratorsList =>
   connect(
@@ -32,5 +37,18 @@ export default OrganizationCollaboratorsList =>
       ...ownProps,
       getOrganizationCollaboratorsList: filters =>
         dispatchProps.getOrganizationCollaboratorsList(stateProps.orgId, filters),
+      selectTableData: state => {
+        const id = { id: stateProps.orgId }
+
+        const collaborators = selectOrganizationCollaborators(state, id)
+        const totalCount = selectOrganizationCollaboratorsTotalCount(state, id)
+        const fetching = selectOrganizationCollaboratorsFetching(state)
+
+        return {
+          collaborators,
+          fetching,
+          totalCount,
+        }
+      },
     }),
   )(OrganizationCollaboratorsList)
