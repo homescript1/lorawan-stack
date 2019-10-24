@@ -15,14 +15,12 @@
 import React from 'react'
 
 import Notification from '../notification'
-import ErrorMessage from '../../lib/components/error-message'
 import { isBackend, getBackendErrorDetails } from '../../lib/errors/utils'
 
 const ErrorNotification = function({ error, ...rest }) {
   const props = { error, ...rest }
-  props.children = ErrorMessage
   if (isBackend(error)) {
-    props.showDetails = getBackendErrorDetails(error)
+    props.details = getBackendErrorDetails(error)
   }
   return <Notification {...props} />
 }

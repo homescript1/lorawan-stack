@@ -16,10 +16,11 @@ import React from 'react'
 import classnames from 'classnames'
 
 import Button from '../button'
+import ErrorMessage from '../../lib/components/error-message'
 import Message from '../../lib/components/message'
 import Icon from '../icon'
-import Details from './details'
 import PropTypes from '../../lib/prop-types'
+import Details from './details'
 import style from './notification.styl'
 
 const Notification = function({
@@ -35,7 +36,6 @@ const Notification = function({
   action,
   actionMessage,
   buttonIcon,
-  children,
   details,
 }) {
   const classname = classnames(style.notification, className, {
@@ -56,6 +56,8 @@ const Notification = function({
 
   const content = message || error || warning || info || success
 
+  const Component = error ? ErrorMessage : Message
+
   return (
     <div className={classname}>
       <div className={style.container}>
@@ -63,8 +65,7 @@ const Notification = function({
         <div className={style.content}>
           {title && <Message className={style.title} content={title} component="h4" />}
           <div>
-            {content && <Message content={content} values={messageValues} />}
-            {children}
+            {content && <Component content={content} values={messageValues} />}
             {action && (
               <Button naked secondary icon={buttonIcon} onClick={action} message={actionMessage} />
             )}
@@ -81,7 +82,6 @@ Notification.propTypes = {
   actionMessage: PropTypes.message,
   buttonIcon: PropTypes.string,
   details: PropTypes.mixed,
-  children: PropTypes.node,
   error: PropTypes.error,
   info: PropTypes.message,
   message: PropTypes.message,

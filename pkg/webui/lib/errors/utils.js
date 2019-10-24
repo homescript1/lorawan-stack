@@ -122,10 +122,10 @@ export const getBackendErrorId = error => error.message.split(' ')[0]
 /**
  * Returns boolean which determines if error details should be displayed.
  * @param {Object} error - The backend error object.
- * @returns {boolean} - Display error details or not.
+ * @returns {Object} - Display error details or not.
  */
 
-export const getBackendErrorDetails = error => !!error.details[0].cause
+export const getBackendErrorDetails = error => (error.details[0].cause ? error : undefined)
 /**
  * Returns the default message of the error, used as fallback translation.
  * @param {Object} error - The backend error object.
